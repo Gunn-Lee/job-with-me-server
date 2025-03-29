@@ -20,7 +20,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get() // GET /users or /users?role=value&age=value
-  fildAll(
+  findAll(
     @Query('email') email?: string,
     @Query('isActive') isActive?: boolean,
   ) {

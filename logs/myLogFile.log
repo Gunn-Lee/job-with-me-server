@@ -1,0 +1,260 @@
+3/29/25, 4:41 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 4:41 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 4:41 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 4:41 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 4:41 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 4:41 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 4:41 PM	NestApplication	 | Nest application successfully started
+3/29/25, 4:41 PM	NestFactory	 | Starting Nest application...
+3/29/25, 4:53 PM	NestFactory	 | Starting Nest application...
+3/29/25, 4:53 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 4:53 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 4:53 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 4:53 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 4:53 PM	NestApplication	 | Nest application successfully started
+3/29/25, 4:53 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 4:53 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 4:53 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:54 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:54 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:55 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:57 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:57 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:57 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:57 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:57 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:57 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:57 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:59 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:59 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:59 PM	NestFactory	 | Starting Nest application...
+3/29/25, 4:59 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 4:59 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 4:59 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 4:59 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 4:59 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 4:59 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 4:59 PM	NestApplication	 | Nest application successfully started
+3/29/25, 4:59 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:59 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 4:59 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:00 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:00 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:00 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:00 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:00 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:00 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:00 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:00 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:00 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:00 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:03 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:03 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:03 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:03 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:03 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:03 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:03 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:03 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:03 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:03 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:03 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:03 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:03 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:03 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:03 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:03 PM	AllExceptionsFilter	 | Internal Server Error
+3/29/25, 5:03 PM	undefined	 | PrismaClientKnownRequestError: 
+Invalid `this.prisma.user.findMany()` invocation in
+/Users/gunn/Desktop/job-with-me-server/src/users/users.service.ts:32:42
+
+  29 }
+  30 
+  31 // Fetch users from database with prisma
+→ 32 const users = await this.prisma.user.findMany(
+The table `public.User` does not exist in the current database.
+3/29/25, 5:04 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:04 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:04 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:04 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:04 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:04 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:04 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:04 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:04 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:04 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:04 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:04 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:04 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:04 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:04 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:07 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:07 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:07 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:07 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:07 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:07 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:07 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:07 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:07 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:07 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:07 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:07 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:07 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:07 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:07 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:09 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:09 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:09 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:09 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:09 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:09 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:09 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:09 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:09 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:09 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:09 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:09 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:09 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:09 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:09 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:09 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:10 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:10 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:10 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:11 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:11 PM	AllExceptionsFilter	 | Internal Server Error
+3/29/25, 5:11 PM	undefined	 | PrismaClientKnownRequestError: 
+Invalid `this.prisma.user.create()` invocation in
+/Users/gunn/Desktop/job-with-me-server/src/users/users.service.ts:65:29
+
+  62 }
+  63 
+  64 async create(createUserDto: CreateUserDto) {
+→ 65   return this.prisma.user.create(
+Unique constraint failed on the fields: (`id`)
+3/29/25, 5:34 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:34 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:34 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:34 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:34 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:34 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:34 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:34 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:34 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:34 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:34 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:34 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:34 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:34 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:34 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:34 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:37 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:37 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:37 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:37 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:37 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:37 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:37 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:37 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:37 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:37 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:37 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:37 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:37 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:37 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:37 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:37 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:37 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:37 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:37 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:37 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:37 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:37 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:37 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:50 PM	NestFactory	 | Starting Nest application...
+3/29/25, 5:50 PM	InstanceLoader	 | PassportModule dependencies initialized
+3/29/25, 5:50 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 5:50 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 5:50 PM	InstanceLoader	 | JwtModule dependencies initialized
+3/29/25, 5:50 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 5:50 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 5:50 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 5:50 PM	InstanceLoader	 | AuthModule dependencies initialized
+3/29/25, 5:50 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 5:50 PM	RoutesResolver	 | AuthController {/api/auth}:
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/auth/login, POST} route
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/auth/refresh, POST} route
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/auth/logout, POST} route
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/auth/profile, GET} route
+3/29/25, 5:50 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 5:50 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 5:50 PM	NestApplication	 | Nest application successfully started
+3/29/25, 5:50 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:50 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 5:51 PM	AllExceptionsFilter	 | [object Object]
+3/29/25, 6:00 PM	NestFactory	 | Starting Nest application...
+3/29/25, 6:00 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+3/29/25, 6:00 PM	InstanceLoader	 | PassportModule dependencies initialized
+3/29/25, 6:00 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+3/29/25, 6:00 PM	InstanceLoader	 | AppModule dependencies initialized
+3/29/25, 6:00 PM	InstanceLoader	 | UsersModule dependencies initialized
+3/29/25, 6:00 PM	InstanceLoader	 | JwtModule dependencies initialized
+3/29/25, 6:00 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+3/29/25, 6:00 PM	InstanceLoader	 | AuthModule dependencies initialized
+3/29/25, 6:00 PM	RoutesResolver	 | AppController {/api}:
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api, GET} route
+3/29/25, 6:00 PM	RoutesResolver	 | AuthController {/api/auth}:
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/auth/login, POST} route
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/auth/refresh, POST} route
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/auth/profile, GET} route
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/auth/logout, POST} route
+3/29/25, 6:00 PM	RoutesResolver	 | UsersController {/api/users}:
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+3/29/25, 6:00 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+3/29/25, 6:00 PM	NestApplication	 | Nest application successfully started

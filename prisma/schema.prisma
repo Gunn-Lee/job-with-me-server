@@ -16,10 +16,17 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
+  password String
   isActive Boolean @default(false)
   role  Role    @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+    // Optional but recommended fields for login functionality
+  refreshToken  String?  // For JWT refresh token storage
+  passwordResetToken String? // For password reset functionality
+  passwordResetExpires DateTime?
+  lastLogin     DateTime? @updatedAt
 }
 
 enum Role {

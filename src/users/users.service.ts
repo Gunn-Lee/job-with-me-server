@@ -2,61 +2,119 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { NotFoundException } from '@nestjs/common';
+import { DatabaseService } from 'src/database/database.service';
+import * as bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class UsersService {
-  // Dummy DB
-  private users = [
-    { id: 1, email: 'John@some.mail', role: 'ADMIN', isActive: true },
-  ];
+  constructor(private prisma: DatabaseService) {}
+  
 
-  findAll(
+  async findAll(
     email?: string,
     isActive?: boolean,
-  ): { id: number; email: string; role: string; isActive: boolean }[] {
-    let user: { id: number; email: string; role: string; isActive: boolean }[] =
-      [];
+  ) {
+    // Build where conditions based on provided filters
+    const where: any = {};
+    
     if (email) {
-      user = this.users.filter((user) => user.email === email);
+      where.email = email;
     }
-    if (email && isActive) {
-      if (user.length === 0) throw new NotFoundException('User not found');
-      else
-        return user as {
-          id: number;
-          email: string;
-          role: string;
-          isActive: boolean;
-        }[];
+    
+    if (isActive !== undefined) {
+      where.isActive = isActive;
     }
-    return this.users;
+    
+    // Fetch users from database with prisma
+    const users = await this.prisma.user.findMany({
+      where,
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        isActive: true,
+      },
+    });
+    
+    if (email && isActive && users.length === 0) {
+      throw new NotFoundException('User not found');
+    }
+    
+    return users;
   }
 
-  findOne(id: number) {
-    const user = this.users.find((user) => user.id === id);
+  async findOne(id: number) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        isActive: true,
+      },
+    });
 
     if (!user) throw new NotFoundException('User not found');
-    return;
+    return user;
   }
 
-  create(createUserDto: CreateUserDto) {
-    const newUserId = [...this.users].sort((a, b) => b.id - a.id)[0].id + 1;
-    const newUser = { id: newUserId, ...createUserDto };
-    this.users.push(newUser);
-
-    return newUser;
+  async create(createUserDto: CreateUserDto) {
+    // Check if the email already exists
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: createUserDto.email },
+    });
+    if (existingUser) {
+      throw new NotFoundException('Email already exists');
+    }
+    // Create the user
+    // Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(createUserDto.password, salt);
+    createUserDto.password = hashedPassword;
+    
+    return this.prisma.user.create({
+      data: createUserDto,
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        isActive: true,
+      },
+    });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    this.users = this.users.map((user) =>
-      user.id === id ? { ...user, ...updateUserDto } : user,
-    );
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    // First check if the user exists
+    await this.findOne(id);
 
-    return this.findOne(id);
+    if(updateUserDto.password) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(updateUserDto.password, salt);
+      updateUserDto.password = hashedPassword;
+    }
+    
+    // Then update the user
+    return this.prisma.user.update({
+      where: { id },
+      data: updateUserDto,
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        isActive: true,
+      },
+    });
   }
 
-  delete(id: number) {
-    this.users = this.users.filter((user) => user.id !== id);
+  async delete(id: number) {
+    // First check if the user exists
+    await this.findOne(id);
+    
+    // Then delete the user
+    await this.prisma.user.delete({
+      where: { id },
+    });
 
     return { id };
   }

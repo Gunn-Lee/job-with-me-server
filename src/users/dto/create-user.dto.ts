@@ -5,6 +5,9 @@ export class CreateUserDto {
   @IsNotEmpty({ message: 'email should not be empty!!' })
   email: string;
 
+  @IsNotEmpty({ message: 'password should not be empty!!' })
+  password: string;
+
   @IsBoolean()
   @IsNotEmpty({ message: 'isActive should not be empty!!' })
   isActive: boolean;
