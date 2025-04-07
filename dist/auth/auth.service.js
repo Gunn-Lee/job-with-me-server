@@ -21,25 +21,68 @@ let AuthService = class AuthService {
         this.prisma = prisma;
         this.jwtService = jwtService;
     }
+    async register(registerDto) {
+        const { email, password } = registerDto;
+        console.log("Registering user:", email);
+        const existingUser = await this.prisma.user.findUnique({
+            where: { email },
+        });
+        if (existingUser) {
+            throw new common_1.ConflictException("Email already registered");
+        }
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const user = await this.prisma.user.create({
+            data: {
+                email,
+                password: hashedPassword,
+                isActive: true,
+                role: "USER",
+            },
+        });
+        const payload = {
+            sub: user.id,
+            email: user.email,
+            role: user.role,
+        };
+        const accessToken = this.jwtService.sign(payload);
+        const refreshToken = this.jwtService.sign({ sub: user.id }, { expiresIn: "7d" });
+        await this.prisma.user.update({
+            where: { id: user.id },
+            data: {
+                refreshToken,
+                lastLogin: new Date(),
+            },
+        });
+        return {
+            access_token: accessToken,
+            refresh_token: refreshToken,
+            user: {
+                id: user.id,
+                email: user.email,
+                role: user.role,
+            },
+        };
+    }
     async login(loginDto) {
         const { email, password } = loginDto;
         const user = await this.prisma.user.findUnique({
             where: { email },
         });
         if (!user || !user.isActive) {
-            throw new common_1.UnauthorizedException('Invalid credentials');
+            throw new common_1.UnauthorizedException("Invalid credentials");
         }
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            throw new common_1.UnauthorizedException('Invalid credentials');
+            throw new common_1.UnauthorizedException("Invalid credentials");
         }
         const payload = {
             sub: user.id,
             email: user.email,
-            role: user.role
+            role: user.role,
         };
         const accessToken = this.jwtService.sign(payload);
-        const refreshToken = this.jwtService.sign({ sub: user.id }, { expiresIn: '7d' });
+        const refreshToken = this.jwtService.sign({ sub: user.id }, { expiresIn: "7d" });
         await this.prisma.user.update({
             where: { id: user.id },
             data: {
@@ -68,19 +111,19 @@ let AuthService = class AuthService {
                 },
             });
             if (!user) {
-                throw new common_1.UnauthorizedException('Invalid refresh token');
+                throw new common_1.UnauthorizedException("Invalid refresh token");
             }
             const newPayload = {
                 sub: user.id,
                 email: user.email,
-                role: user.role
+                role: user.role,
             };
             return {
                 access_token: this.jwtService.sign(newPayload),
             };
         }
         catch (error) {
-            throw new common_1.UnauthorizedException('Invalid refresh token');
+            throw new common_1.UnauthorizedException("Invalid refresh token");
         }
     }
     async logout(userId) {
