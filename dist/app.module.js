@@ -16,6 +16,9 @@ const throttler_1 = require("@nestjs/throttler");
 const core_1 = require("@nestjs/core");
 const my_logger_module_1 = require("./my-logger/my-logger.module");
 const auth_module_1 = require("./auth/auth.module");
+const resumes_module_1 = require("./resumes/resumes.module");
+const s3_module_1 = require("./s3/s3.module");
+const openai_module_1 = require("./openai/openai.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -25,6 +28,9 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
             database_module_1.DatabaseModule,
+            resumes_module_1.ResumesModule,
+            s3_module_1.S3Module,
+            openai_module_1.OpenaiModule,
             throttler_1.ThrottlerModule.forRoot({
                 throttlers: [
                     { name: 'short', ttl: 1000, limit: 3 },
@@ -32,6 +38,9 @@ exports.AppModule = AppModule = __decorate([
                 ],
             }),
             my_logger_module_1.MyLoggerModule,
+            resumes_module_1.ResumesModule,
+            s3_module_1.S3Module,
+            openai_module_1.OpenaiModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [

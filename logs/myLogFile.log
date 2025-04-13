@@ -378,3 +378,61 @@ Unique constraint failed on the fields: (`id`)
 4/6/25, 7:54 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
 4/6/25, 7:54 PM	RouterExplorer	 | Mapped {/api/users, POST} route
 4/6/25, 7:54 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+4/13/25, 3:05 PM	NestFactory	 | Starting Nest application...
+4/13/25, 3:05 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+4/13/25, 3:05 PM	InstanceLoader	 | PassportModule dependencies initialized
+4/13/25, 3:05 PM	InstanceLoader	 | JwtModule dependencies initialized
+4/13/25, 3:05 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+4/13/25, 3:05 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+4/13/25, 3:05 PM	InstanceLoader	 | AppModule dependencies initialized
+4/13/25, 3:05 PM	InstanceLoader	 | UsersModule dependencies initialized
+4/13/25, 3:05 PM	InstanceLoader	 | AuthModule dependencies initialized
+4/13/25, 3:05 PM	RoutesResolver	 | AppController {/api}:
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api, GET} route
+4/13/25, 3:05 PM	RoutesResolver	 | AuthController {/api/auth}:
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/auth/register, POST} route
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/auth/login, POST} route
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/auth/refresh, POST} route
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/auth/logout, POST} route
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/auth/profile, GET} route
+4/13/25, 3:05 PM	RoutesResolver	 | UsersController {/api/users}:
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+4/13/25, 3:05 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+4/13/25, 3:05 PM	NestApplication	 | Nest application successfully started
+4/13/25, 4:51 PM	NestFactory	 | Starting Nest application...
+4/13/25, 4:51 PM	InstanceLoader	 | DatabaseModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | JwtModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | MyLoggerModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | PassportModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | ThrottlerModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | ConfigModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | AppModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | ConfigHostModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | OpenaiModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | S3Module dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | UsersModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | AuthModule dependencies initialized
+4/13/25, 4:51 PM	InstanceLoader	 | ResumesModule dependencies initialized
+4/13/25, 4:51 PM	RoutesResolver	 | AppController {/api}:
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api, GET} route
+4/13/25, 4:51 PM	RoutesResolver	 | AuthController {/api/auth}:
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/auth/register, POST} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/auth/login, POST} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/auth/refresh, POST} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/auth/logout, POST} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/auth/profile, GET} route
+4/13/25, 4:51 PM	RoutesResolver	 | UsersController {/api/users}:
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/users, GET} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/users/:id, GET} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/users, POST} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/users/:id, PATCH} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/users/:id, DELETE} route
+4/13/25, 4:51 PM	RoutesResolver	 | ResumesController {/api/resumes}:
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/resumes/upload, POST} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/resumes, GET} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/resumes/:id, GET} route
+4/13/25, 4:51 PM	RouterExplorer	 | Mapped {/api/resumes/:id, DELETE} route
+4/13/25, 4:51 PM	NestApplication	 | Nest application successfully started

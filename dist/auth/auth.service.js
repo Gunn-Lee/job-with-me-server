@@ -23,7 +23,6 @@ let AuthService = class AuthService {
     }
     async register(registerDto) {
         const { email, password } = registerDto;
-        console.log("Registering user:", email);
         const existingUser = await this.prisma.user.findUnique({
             where: { email },
         });

@@ -7,12 +7,18 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { MyLoggerModule } from './my-logger/my-logger.module';
 import { AuthModule } from './auth/auth.module';
+import { ResumesModule } from './resumes/resumes.module';
+import { S3Module } from './s3/s3.module';
+import { OpenaiModule } from './openai/openai.module';
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     DatabaseModule,
+    ResumesModule,
+    S3Module,
+    OpenaiModule,
     
     ThrottlerModule.forRoot({
       throttlers: [
@@ -22,6 +28,12 @@ import { AuthModule } from './auth/auth.module';
     }),
 
     MyLoggerModule,
+
+    ResumesModule,
+
+    S3Module,
+
+    OpenaiModule,
   ],
   controllers: [AppController],
   providers: [

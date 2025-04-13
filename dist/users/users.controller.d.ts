@@ -22,7 +22,7 @@ export declare class UsersController {
         role: import(".prisma/client").$Enums.Role;
         id: number;
     }>;
-    updateOne(id: number, updateUserDto: UpdateUserDto): Promise<{
+    updateOne(id: number, updateUserDto: UpdateUserDto, req: any): Promise<{
         email: string;
         isActive: boolean;
         role: import(".prisma/client").$Enums.Role;
