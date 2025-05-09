@@ -1,31 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { NotFoundException } from '@nestjs/common';
-import { DatabaseService } from 'src/database/database.service';
-import * as bcrypt from 'bcrypt';
-
+import { Injectable } from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { NotFoundException } from "@nestjs/common";
+import { DatabaseService } from "src/database/database.service";
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: DatabaseService) {}
-  
 
-  async findAll(
-    email?: string,
-    isActive?: boolean,
-  ) {
+  async findAll(email?: string, isActive?: boolean) {
     // Build where conditions based on provided filters
     const where: any = {};
-    
+
     if (email) {
       where.email = email;
     }
-    
+
     if (isActive !== undefined) {
       where.isActive = isActive;
     }
-    
+
     // Fetch users from database with prisma
     const users = await this.prisma.user.findMany({
       where,
@@ -36,11 +31,11 @@ export class UsersService {
         isActive: true,
       },
     });
-    
+
     if (email && isActive && users.length === 0) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException("User not found");
     }
-    
+
     return users;
   }
 
@@ -55,7 +50,7 @@ export class UsersService {
       },
     });
 
-    if (!user) throw new NotFoundException('User not found');
+    if (!user) throw new NotFoundException("User not found");
     return user;
   }
 
@@ -65,14 +60,14 @@ export class UsersService {
       where: { email: createUserDto.email },
     });
     if (existingUser) {
-      throw new NotFoundException('Email already exists');
+      throw new NotFoundException("Email already exists");
     }
     // Create the user
     // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(createUserDto.password, salt);
     createUserDto.password = hashedPassword;
-    
+
     return this.prisma.user.create({
       data: createUserDto,
       select: {
@@ -88,12 +83,12 @@ export class UsersService {
     // First check if the user exists
     await this.findOne(id);
 
-    if(updateUserDto.password) {
+    if (updateUserDto.password) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(updateUserDto.password, salt);
       updateUserDto.password = hashedPassword;
     }
-    
+
     // Then update the user
     return this.prisma.user.update({
       where: { id },
@@ -110,7 +105,7 @@ export class UsersService {
   async delete(id: number) {
     // First check if the user exists
     await this.findOne(id);
-    
+
     // Then delete the user
     await this.prisma.user.delete({
       where: { id },

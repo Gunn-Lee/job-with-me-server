@@ -1,14 +1,10 @@
 // src/resumes/resumes.service.ts
-import { Injectable } from '@nestjs/common';
-import { DatabaseService } from '../database/database.service';
-import { S3Service } from '../s3/s3.service';
-import { OpenAiService } from '../openai/openai.service';
-import { CreateResumeDto } from './dto/create-resume.dto';
-import * as fs from 'fs';
-import * as util from 'util';
-import * as pdf from 'pdf-parse';
-
-const readFile = util.promisify(fs.readFile);
+import { Injectable } from "@nestjs/common";
+import { DatabaseService } from "../database/database.service";
+import { S3Service } from "../s3/s3.service";
+import { OpenAiService } from "../openai/openai.service";
+// import { CreateResumeDto } from "./dto/create-resume.dto";
+import * as pdf from "pdf-parse";
 
 @Injectable()
 export class ResumesService {
@@ -19,24 +15,38 @@ export class ResumesService {
   ) {}
 
   async create(file: Express.Multer.File, userId: number) {
+    // Validate file type
+    if (!file.buffer) {
+      throw new Error("No file buffer: be sure to use multer.memoryStorage()");
+    }
+    const buffer: Buffer = file.buffer;
+
     // 1. Upload file to S3
     const key = `resumes/${userId}-${Date.now()}-${file.originalname}`;
     const filePath = await this.s3Service.uploadFile(file, key);
-    
+
+    console.info("resume saved at", filePath);
+
     // 2. Extract text from PDF (if it's a PDF)
-    let resumeText = '';
-    if (file.mimetype === 'application/pdf') {
-      const pdfData = await pdf(file.buffer);
-      resumeText = pdfData.text;
+    let resumeText = "";
+
+    if (file.mimetype === "application/pdf") {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        const pdfData = (await pdf(buffer)) as { text: string };
+        resumeText = pdfData.text;
+      } catch (error) {
+        console.error("Error extracting text from PDF:", error);
+        throw new Error("Failed to extract text from PDF");
+      }
     } else {
       // Handle other file types or use a third-party service
-      // For simplicity, we'll assume it's plain text
-      resumeText = file.buffer.toString('utf-8');
+      throw new Error("Only PDF files are supported");
     }
-    
+
     // 3. Get summary from OpenAI
     const summary = await this.openAiService.summarizeResume(resumeText);
-    
+
     // 4. Save to database
     const resume = await this.prisma.resume.create({
       data: {
@@ -57,7 +67,7 @@ export class ResumesService {
         isDefault: false,
       },
     });
-    
+
     return resume;
   }
 

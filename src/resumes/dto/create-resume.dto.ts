@@ -1,5 +1,5 @@
 // src/resumes/dto/create-resume.dto.ts
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateResumeDto {
   @IsNotEmpty()

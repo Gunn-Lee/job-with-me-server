@@ -3,11 +3,11 @@ import {
   ArgumentsHost,
   HttpStatus,
   HttpException,
-} from '@nestjs/common';
-import { BaseExceptionFilter } from '@nestjs/core';
-import { Request, Response } from 'express';
-import { MyLoggerService } from './my-logger/my-logger.service';
-import { PrismaClientValidationError } from '@prisma/client/runtime/library';
+} from "@nestjs/common";
+import { BaseExceptionFilter } from "@nestjs/core";
+import { Request, Response } from "express";
+import { MyLoggerService } from "./my-logger/my-logger.service";
+import { PrismaClientValidationError } from "@prisma/client/runtime/library";
 
 type MyResponseObj = {
   statusCode: number;
@@ -30,14 +30,14 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
       statusCode: 500,
       timestamp: new Date().toISOString(),
       path: request.url,
-      response: '',
+      response: "",
     };
 
     // Handle Various Error Types
     // Add more Prisma Error Types if you want
 
     // Check if this is a socket.io 404 request
-    const isSocketIoRequest = request.url.startsWith('/socket.io/');
+    const isSocketIoRequest = request.url.startsWith("/socket.io/");
     if (exception instanceof HttpException) {
       myResponseObj.statusCode = exception.getStatus();
       myResponseObj.response = exception.getResponse();
@@ -49,10 +49,10 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
       }
     } else if (exception instanceof PrismaClientValidationError) {
       myResponseObj.statusCode = 422;
-      myResponseObj.response = exception.message.replaceAll(/\n/g, ' ');
+      myResponseObj.response = exception.message.replaceAll(/\n/g, " ");
     } else {
       myResponseObj.statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-      myResponseObj.response = 'Internal Server Error';
+      myResponseObj.response = "Internal Server Error";
     }
 
     //Send response
