@@ -59,11 +59,11 @@ export class ResumesController {
   @UseInterceptors(
     FileInterceptor("file", {
       limits: { fileSize: 4 * 1024 * 1024 }, // 4 MB limit
-    }),
+    })
   )
   async uploadResume(
     @UploadedFile() file: Express.Multer.File,
-    @Request() req: RequestWithUser,
+    @Request() req: RequestWithUser
   ) {
     console.log("user", req.user);
     return this.resumesService.create(file, req.user.id);
@@ -77,9 +77,9 @@ export class ResumesController {
   })
   @ApiResponse({ status: 401, description: "Unauthorized" })
   @UseGuards(JwtAuthGuard)
-  @Get()
-  findAll(@Request() req: RequestWithUser) {
-    return this.resumesService.findAll(req.user.id);
+  @Get(":userId")
+  findAll(@Param("userId", ParseIntPipe) userId: number) {
+    return this.resumesService.findAll(userId);
   }
 
   @ApiBearerAuth()

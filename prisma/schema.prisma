@@ -38,11 +38,15 @@ enum Role {
 
 model Resume {
   id          Int      @id @default(autoincrement())
+  title       String?
   filePath    String
+  size        Float?
   summary     String?  @db.Text
   user        User     @relation(fields: [userId], references: [id])
   userId      Int
   isDefault   Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  isDeleted   Boolean  @default(false)
+  deletedAt   DateTime?
 }

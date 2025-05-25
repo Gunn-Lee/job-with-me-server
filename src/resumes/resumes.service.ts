@@ -11,7 +11,7 @@ export class ResumesService {
   constructor(
     private prisma: DatabaseService,
     private s3Service: S3Service,
-    private openAiService: OpenAiService,
+    private openAiService: OpenAiService
   ) {}
 
   async create(file: Express.Multer.File, userId: number) {
@@ -54,6 +54,8 @@ export class ResumesService {
         summary,
         userId,
         isDefault: true,
+        title: file.originalname,
+        size: Math.round((file.size * 100) / (1024 * 1024)) / 100, // size in MB(2 decimal)
       },
     });
 
@@ -62,6 +64,9 @@ export class ResumesService {
       where: {
         userId,
         isDefault: true,
+        id: {
+          not: resume.id,
+        },
       },
       data: {
         isDefault: false,
