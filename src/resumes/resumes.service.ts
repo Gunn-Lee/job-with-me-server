@@ -3,7 +3,6 @@ import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "../database/database.service";
 import { S3Service } from "../s3/s3.service";
 import { OpenAiService } from "../openai/openai.service";
-// import { CreateResumeDto } from "./dto/create-resume.dto";
 import * as pdf from "pdf-parse";
 
 @Injectable()
@@ -46,16 +45,50 @@ export class ResumesService {
 
     // 3. Get summary from OpenAI
     const summary = await this.openAiService.summarizeResume(resumeText);
+    
+    type ResumeSummary = {
+      name?: string;
+      email?: string;
+      linkedIn?: string;
+      education?: Array<{
+        degree?: string;
+        major?: string;
+        institution?: string;
+        from?: string;
+        to?: string;
+      }>;
+    experience?: Array<{
+        company?: string;
+        location?: string;
+        position?: string;
+        from?: string;
+        to?: string;
+        description?: string;
+      }>;
+      skill?: string;
+      certification?: string;
+      note?: string;
+      summary?: string; // This is the brief summary of the resume
+    };
 
+    const parsedSummary: ResumeSummary = JSON.parse(summary);
+    console.info("parsed resume summary", parsedSummary);
+    // return parsedSummary;
     // 4. Save to database
     const resume = await this.prisma.resume.create({
       data: {
         filePath,
-        summary,
         userId,
         isDefault: true,
         title: file.originalname,
         size: Math.round((file.size * 100) / (1024 * 1024)) / 100, // size in MB(2 decimal)
+        name: parsedSummary.name,
+        education: parsedSummary.education,
+        experience: parsedSummary.experience,
+        skill: parsedSummary.skill,
+        certification: parsedSummary.certification,
+        note: parsedSummary.note,
+        summary: parsedSummary.summary,
       },
     });
 
@@ -77,9 +110,20 @@ export class ResumesService {
   }
 
   async findAll(userId: number) {
-    return this.prisma.resume.findMany({
-      where: { userId },
+    const resumes = await this.prisma.resume.findMany({
+      where: { userId, isDeleted: false },
+      orderBy: { createdAt: "desc" },
     });
+
+    console.log("resumes found", resumes);
+
+    return resumes.map((resume) => ({
+      ...resume,
+      experience: resume.experience || [],
+      education: resume.education || [],
+      skill: resume.skill?.replace(/"/g, "").split(", ").map((s) => s.trim()) || [], 
+      certification: resume.certification?.replace(/"/g, "").split(", ").map((c) => c.trim()) || [],
+    }));
   }
 
   async findOne(id: number) {
@@ -89,7 +133,6 @@ export class ResumesService {
   }
 
   async remove(id: number) {
-    // You might want to delete the file from S3 as well
     return this.prisma.resume.delete({
       where: { id },
     });

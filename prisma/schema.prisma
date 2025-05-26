@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,39 +8,43 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  password String
-  isActive Boolean @default(false)
-  role  Role    @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-    // Optional but recommended fields for login functionality
-  refreshToken  String?  // For JWT refresh token storage
-  passwordResetToken String? // For password reset functionality
+  id                   Int       @id @default(autoincrement())
+  email                String    @unique
+  isActive             Boolean   @default(false)
+  role                 Role      @default(USER)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  lastLogin            DateTime? @updatedAt
+  password             String
   passwordResetExpires DateTime?
-  lastLogin     DateTime? @updatedAt
+  passwordResetToken   String?
+  refreshToken         String?
+  resumes              Resume[]
+}
 
-  resumes     Resume[]
+model Resume {
+  id           Int      @id @default(autoincrement())
+  filePath     String
+  summary      String?
+  userId       Int
+  isDefault    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  title        String?  @default("New Resume")
+  size         Float?   @db.Real
+  isDeleted    Boolean  @default(false)
+  name         String?
+  email        String?
+  education    Json?    @db.Json
+  experience   Json?    @db.Json
+  skill        String?
+  certification String?
+  linkedIn     String?
+  note         String?
+  user         User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
   ADMIN
   USER
-}
-
-model Resume {
-  id          Int      @id @default(autoincrement())
-  title       String?
-  filePath    String
-  size        Float?
-  summary     String?  @db.Text
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
-  isDefault   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  isDeleted   Boolean  @default(false)
-  deletedAt   DateTime?
 }

@@ -13,38 +13,69 @@ export class OpenAiService {
     });
   }
 
-  async summarizeResume(resumeText: string): Promise<string> {
-    const response = await this.openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content:
-            "You are a helpful assistant that summarizes a resume for job applications.",
-        },
-        {
-          role: "user",
-          content: `Summarize this resume for job application including the following details: name, contact information, education, work experience, skills, and certifications.:\n\n${resumeText}`,
-        },
-        {
-          role: "user",
-          content: `the result should be in a valid object string to be parsed directly with the following keys: name, contact, education, workExperience, skills, certifications. \n\n
-            Example: { "name": "John Doe", "contact": "johndoe@gmail.com", "education": "Stony Brook University", "workExperience": [
-                {
-                  "company": "Universal Steel Product",
-                  "location": "Fort Lee, NJ",
-                  "position": "Software Engineer",
-                  "from": "Mar 2024",
-                  "to": "Present",
-                  "description": "Led the design and development of new ERP modules using TypeScript, Next.js, Node.js, and GCP, boosting performance (25% lower latency, 55% higher data capacity) and migrating to a scalable cloud architecture, reducing server maintenance costs by $560/month. Implemented CI/CD, unit/E2E testing (75% coverage), and agile practices to cut deployment times by 30% and shorten project timelines by 2 weeks."
-                },
-            ], "skills": ["JavaScript", "React", "Next.js", "Node.js", "AWS", "Unit Testing"], "certifications": ["AWS Solutions Architect Certificate", "Salesforce Developer Certificate"] } \n Work experience should be an array of objects with the following keys: company, location, position, from, to, description with the 3 most recent experience at most. \n\n
-            `,
-        },
-      ],
-      max_tokens: 500,
-    });
+ async summarizeResume(resumeText: string): Promise<string> {
+  const response = await this.openai.chat.completions.create({
+    model: "gpt-4o", // Use "gpt-4o" unless you have access to "gpt-4o-mini"
+    messages: [
+      {
+        role: "system",
+        content: "You are a helpful assistant that summarizes a resume for job applications."
+      },
+      {
+        role: "user",
+        content: `
+Summarize the following resume and extract these fields:
+- name
+- email (from resume text, if available)
+- linkedin (if available, otherwise leave empty)
+- education (array: degree, major, institution, from, to)
+- experience (array: company, location, position, from, to (use "Present" if current), description of 2-3 sentences: responsibilities, key tech/frameworks, quantifiable achievements)
+- skill (all mentioned and directly relevant skills, comma-separated)
+- certification (comma-separated)
+- note (additional note if any)
+- summary (a brief summary of the resume in 500 characters or less)
 
-    return response.choices[0].message.content as string;
+Return ONLY a valid object string with this exact structure, no explanations, no markdown, nothing else:
+
+{
+  "name": "",
+  "email": "",
+  "linkedIn": "",
+  "education": [
+    {
+      "degree": "",
+      "major": "",
+      "institution": "",
+      "from": "",
+      "to": ""
+    }
+  ],
+  "experience": [
+    {
+      "company": "",
+      "location": "",
+      "position": "",
+      "from": "",
+      "to": "",
+      "description": ""
+    }
+  ],
+  "skill": "",
+  "certification": "",
+  "note": ""
+  "summary": ""
+}
+
+Resume:
+${resumeText}
+        `.trim()
+      }
+    ],
+    max_tokens: 1000,
+    temperature: 0.2 // Optional: add for more consistent output
+  });
+
+  // If you want to extract only the JSON string from the response, you could parse it here.
+  return response.choices[0].message.content as string;
   }
 }
