@@ -72,8 +72,8 @@ export class ResumesService {
     };
 
     const parsedSummary: ResumeSummary = JSON.parse(summary);
-    console.info("parsed resume summary", parsedSummary);
-    // return parsedSummary;
+    // console.info("parsed resume summary", parsedSummary);
+    
     // 4. Save to database
     const resume = await this.prisma.resume.create({
       data: {
@@ -115,7 +115,7 @@ export class ResumesService {
       orderBy: { createdAt: "desc" },
     });
 
-    console.log("resumes found", resumes);
+    // console.log("resumes found", resumes);
 
     return resumes.map((resume) => ({
       ...resume,

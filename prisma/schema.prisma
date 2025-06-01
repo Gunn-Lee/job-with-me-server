@@ -8,40 +8,58 @@ datasource db {
 }
 
 model User {
-  id                   Int       @id @default(autoincrement())
-  email                String    @unique
-  isActive             Boolean   @default(false)
-  role                 Role      @default(USER)
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
-  lastLogin            DateTime? @updatedAt
+  id                   Int           @id @default(autoincrement())
+  email                String        @unique
+  isActive             Boolean       @default(false)
+  role                 Role          @default(USER)
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  lastLogin            DateTime?     @updatedAt
   password             String
   passwordResetExpires DateTime?
   passwordResetToken   String?
   refreshToken         String?
+  Application          Application[]
   resumes              Resume[]
 }
 
 model Resume {
-  id           Int      @id @default(autoincrement())
-  filePath     String
-  summary      String?
-  userId       Int
-  isDefault    Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  title        String?  @default("New Resume")
-  size         Float?   @db.Real
-  isDeleted    Boolean  @default(false)
-  name         String?
-  email        String?
-  education    Json?    @db.Json
-  experience   Json?    @db.Json
-  skill        String?
+  id            Int           @id @default(autoincrement())
+  filePath      String
+  summary       String?
+  userId        Int
+  isDefault     Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  title         String?       @default("New Resume")
+  size          Float?        @db.Real
+  isDeleted     Boolean       @default(false)
+  name          String?
+  email         String?
+  education     Json?         @db.Json
+  experience    Json?         @db.Json
+  skill         String?
   certification String?
-  linkedIn     String?
-  note         String?
-  user         User     @relation(fields: [userId], references: [id])
+  linkedIn      String?
+  note          String?
+  Application   Application[]
+  user          User          @relation(fields: [userId], references: [id])
+}
+
+model Application {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  resumeId        Int
+  jobDescription  String   @default("''")
+  companyName     String   @default("''") @db.VarChar(255)
+  jobTitle        String   @default("''") @db.VarChar(255)
+  coverLetter     String   @default("''")
+  matchingSummary String   @default("''")
+  matchScore      Int      @default(0)
+  createdAt       DateTime @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime @default(now()) @db.Timestamp(6)
+  Resume          Resume   @relation(fields: [resumeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User            User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 enum Role {

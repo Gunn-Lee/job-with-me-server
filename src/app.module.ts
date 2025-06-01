@@ -10,6 +10,7 @@ import { AuthModule } from "./auth/auth.module";
 import { ResumesModule } from "./resumes/resumes.module";
 import { S3Module } from "./s3/s3.module";
 import { OpenaiModule } from "./openai/openai.module";
+import { ApplicationsModule } from './applications/applications.module';
 
 @Module({
   imports: [
@@ -19,21 +20,18 @@ import { OpenaiModule } from "./openai/openai.module";
     ResumesModule,
     S3Module,
     OpenaiModule,
-
+    MyLoggerModule,
+    ResumesModule,
+    S3Module,
+    OpenaiModule,
+    ApplicationsModule,
     ThrottlerModule.forRoot({
       throttlers: [
         { name: "short", ttl: 1000, limit: 3 },
         { name: "long", ttl: 60000, limit: 100 },
       ],
     }),
-
-    MyLoggerModule,
-
-    ResumesModule,
-
-    S3Module,
-
-    OpenaiModule,
+    
   ],
   controllers: [AppController],
   providers: [
